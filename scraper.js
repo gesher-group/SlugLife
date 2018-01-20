@@ -21,28 +21,38 @@ let allID = document.querySelectorAll('[id^=textbox]')
 
 
 var collegeMenuSites = []
-
+var links = []
 url = 'https://dining.ucsc.edu/eat/'
 
 request(url, function (error, response, html) {
     if (!error) {
-        console.log(html)
-        var $ = cheerio.load(html)
+        let $ = cheerio.load(html)
         var data = $(this)
         var expression = /<a class="btn btn-info" href="[a-zA-Z:\/.\?=0-9&;]*/g;
         var wholeLink = html.match(expression)
 
-        var links = []
+        
 
         for (let i = 0; i<wholeLink.length; i++){
         	var parsing = wholeLink[i].split('<a class="btn btn-info" href="')
-        	console.log(parsing)
         	links.push(parsing[1])
         }
 
-        for (let i = 0; i < links.length; i++){
-        	console.log(links[i])
-        }
 
     }
+
+    links.splice(5,9) //remove the extra links.
+
+    for (let i = 0; i < links.length; i++){
+    
+        request(links[i], function(error,response, html) {
+            let $ = cheerio.load(html)
+            let title = $("[title^='main']")
+            collegeMenuSites.push(title["0"].attribs.src)
+        })
+    }
+    
 })
+
+
+
