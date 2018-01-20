@@ -1,0 +1,17 @@
+{
+  "name": "sluglife",
+  "version": "1.0.0",
+  "description": "App to track your calories and the food menu at UCSC",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^1.7.10",
+    "express": "latest",
+    "request": "latest",
+    "cheerio": "latest"
+  }
+}
