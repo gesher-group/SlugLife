@@ -21,7 +21,7 @@ let allID = document.querySelectorAll('[id^=textbox]')
 
 
 var collegeMenuSites = []
-var menus = []
+
 url = 'https://dining.ucsc.edu/eat/'
 
 request(url, function (error, response, html) {
@@ -29,14 +29,11 @@ request(url, function (error, response, html) {
         console.log(html)
         var $ = cheerio.load(html)
         var data = $(this)
+        var expression = /<a class="btn btn-info" href="[a-zA-Z:\/.\?=0-9&;]*/g;
+        var x = html.match(expression)
 
-        menus = $(".archive-list").children();
-        console.log(menus.length)
+        console.log(x)
         
-        for (let i = 0; i < menus.length; i++) {
-            console.log(menus[i].text())
-        }
-
-
+    
     }
 })
