@@ -30,10 +30,19 @@ request(url, function (error, response, html) {
         var $ = cheerio.load(html)
         var data = $(this)
         var expression = /<a class="btn btn-info" href="[a-zA-Z:\/.\?=0-9&;]*/g;
-        var x = html.match(expression)
+        var wholeLink = html.match(expression)
 
-        console.log(x)
-        
-    
+        var links = []
+
+        for (let i = 0; i<wholeLink.length; i++){
+        	var parsing = wholeLink[i].split('<a class="btn btn-info" href="')
+        	console.log(parsing)
+        	links.push(parsing[1])
+        }
+
+        for (let i = 0; i < links.length; i++){
+        	console.log(links[i])
+        }
+
     }
 })
