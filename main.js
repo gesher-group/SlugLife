@@ -49,7 +49,7 @@ app.on('ready', function(){
       win.webContents.openDevTools()
 
       ipcMain.on('open-menu', function(id){
-          if()
+          
       })
 })
 
