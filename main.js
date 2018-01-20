@@ -15,18 +15,21 @@ menuUrl['Cowell/Stevonson'] = urlName + urlPrefix + "05" + urlSuffix
 menuUrl['Crown/Merrill'] = urlName + urlPrefix + "20" + urlSuffix
 menuUrl['Porter/Kresge'] = urlName + urlPrefix + "25" + urlSuffix
 menuUrl['Carson/Oakes'] = urlName + urlPrefix + "30" + urlSuffix
-menuUrl['9.10'] = urlName + urlPrefix + "40" + urlSuffix
+menuUrl['College 9/10'] = urlName + urlPrefix + "40" + urlSuffix
 
 
 
 let win = null
+var diningMenus = null
 
 function openDiningHallMenu (id){
-        
-
+    let win = new BrowserWindow({
+        width: 200,
+        height: 200,
+        title: id
+    })
+    win.show()
 }
-
-
 
 app.on('ready', function(){
     win = new BrowserWindow(
@@ -48,8 +51,8 @@ app.on('ready', function(){
       
       win.webContents.openDevTools()
 
-      ipcMain.on('open-menu', function(id){
-          
+      ipcMain.on('open-menu', function(event, id){
+        openDiningHallMenu(id)
       })
 })
 

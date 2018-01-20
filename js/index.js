@@ -1,3 +1,9 @@
+var {ipcRenderer} = require('electron');
+
+function openMenu(element){
+  ipcRenderer.send('open-menu', element.innerHTML)
+}
+
 $('.open-overlay').click(function() {
   var overlay_navigation = $('.overlay-navigation'),
     nav_item_1 = $('nav li:nth-of-type(1)'),
