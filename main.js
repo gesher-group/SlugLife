@@ -22,7 +22,7 @@ menuUrl['9.10'] = urlName + urlPrefix + "40" + urlSuffix
 let win = null
 
 function openDiningHallMenu (id){
-    
+        
 
 }
 
@@ -48,6 +48,9 @@ app.on('ready', function(){
       
       win.webContents.openDevTools()
 
+      ipcMain.on('open-menu', function(id){
+          if()
+      })
 })
 
 app.on('window-all-closed',() =>{
