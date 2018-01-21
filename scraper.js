@@ -4,8 +4,8 @@ const rp = require('request-promise');
 const fd = require('./food')
 const cl = require('./college')
 const sp = require('scrapejs').init({
-    cc: 2, // up to 2 concurrent requests
-    delay: 2 * 1000 // delay 2 seconds before each request
+    cc: 50, // up to 2 concurrent requests
+    delay: 2 * 100 // delay 2 seconds before each request
 });
 
 const cowell = 'Cowell_Stevonson'
@@ -15,7 +15,11 @@ const carson = 'Carson_Oakes'
 const nine = 'College_9_10'
 
 
-//type is Breakfast, Lunch, Dinner.
+let nutUrl = {};
+let urlName = "http://nutrition.sa.ucsc.edu/"
+let nutPrefix = "pickMenu.asp?locationNum="
+
+//type is Breakfast, Lunch, Dinner, or Late+Night
 function getMealOptions(type, collegeName){
     return nutUrl[collegeName] + "&mealName=" + type
 }
@@ -35,13 +39,9 @@ function getMenuNutrition(menuUrl){
         }
         return stringLinks
     })
+
 }
 
-var urlName = "http://nutrition.sa.ucsc.edu/"
-var urlPrefix = "menuSamp.asp?locationNum="
-var nutPrefix = "pickMenu.asp?locationNum="
-
-var nutUrl = {}
 nutUrl[cowell] = urlName + nutPrefix + "05"
 nutUrl[crown] = urlName + nutPrefix + "20"
 nutUrl[porter] = urlName + nutPrefix + "25"
@@ -78,7 +78,7 @@ nutUrl[nine] = urlName + nutPrefix + "40"
                 }
             }
 
-            fucky(college, function(newCollege) {
+            fucky(name, college, function(newCollege) {
                 callback(newCollege)
             })
         })
@@ -87,20 +87,100 @@ nutUrl[nine] = urlName + nutPrefix + "40"
         })
  }
 
- function fucky(college, callback) {
-     let breakfastURL = getMealOptions("Breakfast", nine)
+ function fucky(name, college, callback) {
+     let menuCounter = 0
+
+     // Breakfast
+     let breakfastURL = getMealOptions("Breakfast", name)
      console.log(breakfastURL)
      getMenuNutrition(breakfastURL).then(function(nutLinks) {
          console.log(nutLinks.length)
          for(let i = 0; i < nutLinks.length; i++) {
              parseNutritionInfo(nutLinks[i], function(nut) {
-                 college.foods[0][i].addNutritionInfo(nut)
+                 college.breakfast[i].addNutritionInfo(nut)
                  if(i === nutLinks.length - 1) {
-                     callback(college)
+                     menuCounter++;
+                     // console.log("DONE 1")
+                     if(menuCounter === 4) {
+                         callback(college)
+                     }
                  }
              })
          }
      })
+
+     // Lunch
+     let lunchURL = getMealOptions("Lunch", name)
+     console.log(lunchURL)
+     getMenuNutrition(lunchURL).then(function(nutLinks) {
+         console.log(nutLinks.length)
+         for(let i = 0; i < nutLinks.length; i++) {
+             parseNutritionInfo(nutLinks[i], function(nut) {
+                 // console.log(college.lunch[i].name + " " + i + " " + (nutLinks.length - 1))
+                 if(name === carson) {
+                     if(i >= 3)
+                        college.lunch[i - 3].addNutritionInfo(nut)
+                 } else {
+                     college.lunch[i].addNutritionInfo(nut)
+                 }
+                 if(i === nutLinks.length - 1 ||
+                    name === carson && i === nutLinks.length - 1 - 3 ||
+                    name === cowell && i === nutLinks.length - 1 - 1) {
+                     menuCounter++;
+                     // console.log("DONE 2")
+                     if(menuCounter === 4) {
+                         callback(college)
+                     }
+                 }
+             })
+         }
+     })
+
+     // Dinner
+     let dinnerURL = getMealOptions("Dinner", name)
+     console.log(dinnerURL)
+     getMenuNutrition(dinnerURL).then(function(nutLinks) {
+         console.log(nutLinks.length)
+         for(let i = 0; i < nutLinks.length; i++) {
+             parseNutritionInfo(nutLinks[i], function(nut) {
+                 college.dinner[i].addNutritionInfo(nut)
+                 if(i === nutLinks.length - 1) {
+                     menuCounter++;
+                     // console.log("DONE 3")
+                     if(menuCounter === 4) {
+                         callback(college)
+                     }
+                 }
+             })
+         }
+     })
+
+     // Late Night
+     if(college.lateNight.length !== 0) {
+         let lateNightURL = getMealOptions("Late+Night", name)
+         console.log(lateNightURL)
+         getMenuNutrition(lateNightURL).then(function (nutLinks) {
+             console.log(nutLinks.length)
+             console.log(nutLinks[0])
+             for (let i = 0; i < nutLinks.length; i++) {
+                 parseNutritionInfo(nutLinks[i], function (nut) {
+                     college.lateNight[i].addNutritionInfo(nut)
+                     if (i === nutLinks.length - 1) {
+                         menuCounter++;
+                         // console.log("DONE 4")
+                         if(menuCounter === 4) {
+                             callback(college)
+                         }
+                     }
+                 })
+             }
+         })
+     } else {
+         menuCounter++;
+         if(menuCounter === 4) {
+             callback(college)
+         }
+     }
  }
 
  function parseNutritionInfo(url, callback) {

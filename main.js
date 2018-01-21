@@ -76,18 +76,53 @@ app.on('ready', function(){
     })
 
     scraper.parseCollege(nine, menuUrl[nine], function (college) {
-        console.log(college.breakfast[0].name)
-        console.log(college.breakfast[0].tags)
-        console.log(college.breakfast[0].nutritionInfo.info)
-        // pushToFirebase(collegeMenu)
+        // console.log("")
+        //
+        // console.log(college.breakfast[0].name)
+        // console.log(college.breakfast[0].tags)
+        // console.log(college.breakfast[0].nutritionInfo.info)
+        //
+        // console.log("")
+        //
+        // console.log(college.lunch[0].name)
+        // console.log(college.lunch[0].tags)
+        // console.log(college.lunch[0].nutritionInfo.info)
+        //
+        // console.log("")
+        //
+        // console.log(college.dinner[0].name)
+        // console.log(college.dinner[0].tags)
+        // console.log(college.dinner[0].nutritionInfo.info)
+        //
+        // console.log("")
+        //
+        // console.log(college.lateNight[0].name)
+        // console.log(college.lateNight[0].tags)
+        // console.log(college.lateNight[0].nutritionInfo.info)
+
+        // pushToFront(nine, college)
+        console.log("DONE")
     })
 
-    // getMenuNutrition(getMealOptions("Breakfast", 'College 9/10')).then(links =>{
-    //     console.log(links)
+    scraper.parseCollege(carson, menuUrl[carson], function (college) {
+        // pushToFront(carson, college)
+        console.log("DONE")
+    })
+
+    scraper.parseCollege(cowell, menuUrl[cowell], function (college) {
+        // pushToFront(cowell, college)
+        console.log("DONE")
+    })
+
+    // scraper.parseCollege(porter, menuUrl[porter], function (college) {
+    //     // pushToFront(porter, college)
+    //     console.log("DONE")
     // })
-    //
-    // scraper.parseNutritionInfo("http://nutrition.sa.ucsc.edu/label.asp?locationNum=40&locationName=College+Nine+%26+Ten&dtdate=01%2F20%2F2018&RecNumAndPort=217004%2A2")
-    // scraper.parseNutritionInfo("http://nutrition.sa.ucsc.edu/label.asp?locationNum=40&locationName=College+Nine+%26+Ten&dtdate=01%2F20%2F2018&RecNumAndPort=089014%2A2")
+
+    // scraper.parseCollege(crown, menuUrl[crown], function (college) {
+    //     // pushToFront(crown, college)
+    //     console.log("DONE")
+    // })
 })
 
 app.on('window-all-closed',() =>{
