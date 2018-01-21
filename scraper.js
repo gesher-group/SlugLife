@@ -52,44 +52,81 @@ const sp = require('scrapejs').init({
              let servingSizeString = $.q(servingSizeXpath)[0].textContent
              let servingSize = parseInt(servingSizeString.substring(0, servingSizeString.indexOf(" ")))
              nut.add("Serving Size", servingSize)
-             console.log(nut.info["Serving Size"])
+             console.log("Serving Size " + nut.info["Serving Size"])
 
              let caloriesXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[1]/td[1]/font[4]"
              let caloriesString = $.q(caloriesXpath)[0].textContent
              let calories = parseInt(caloriesString.substring(9, caloriesString.length))
              nut.add("Calories", calories)
-             console.log(nut.info["Calories"])
+             console.log("Calories " + nut.info["Calories"])
 
              let fatCaloriesXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[1]/td[1]/font[5]"
              let fatCaloriesString = $.q(fatCaloriesXpath)[0].textContent
              let fatCalories = parseInt(fatCaloriesString.substring(22, fatCaloriesString.length))
              nut.add("Calories from Fat", fatCalories)
-             console.log(nut.info["Calories from Fat"])
+             console.log("Calories from Fat " + nut.info["Calories from Fat"])
 
              let fatCarbsXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[2]/td[3]/font[2]"
-             addGram($, nut, "Tot. Carb.", fatCarbsXpath)
-             console.log(nut.info["Tot. Carb."])
+             addG($, nut, "Tot. Carb.", fatCarbsXpath)
+             console.log("Tot. Carb. " + nut.info["Tot. Carb."])
 
              let dietaryFiberXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[3]/td[3]/font[2]"
-             addGram($, nut, "Dietary Fiber", dietaryFiberXpath)
-             console.log(nut.info["Dietary Fiber"])
+             addG($, nut, "Dietary Fiber", dietaryFiberXpath)
+             console.log("Dietary Fiber " + nut.info["Dietary Fiber"])
 
              let sugarsXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[4]/td[3]/font[2]"
-             addGram($, nut, "Sugars", sugarsXpath)
-             console.log(nut.info["Sugars"])
+             addG($, nut, "Sugars", sugarsXpath)
+             console.log("Sugars " + nut.info["Sugars"])
 
-             let sugarsXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[4]/td[3]/font[2]"
-             addGram($, nut, "Sugars", sugarsXpath)
-             console.log(nut.info["Sugars"])
+             let totalFatXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[2]/td[1]/font[2]"
+             addG($, nut, "Total Fat", totalFatXpath)
+             console.log("Total Fat " + nut.info["Total Fat"])
+
+             let satFatXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[3]/td[1]/font[2]"
+             addG($, nut, "Sat. Fat", satFatXpath)
+             console.log("Sat. Fat " + nut.info["Sat. Fat"])
+
+             let transFatXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[4]/td[1]/font[2]"
+             addG($, nut, "Trans Fat", transFatXpath)
+             console.log("Trans Fat " + nut.info["Trans Fat"])
+
+             let cholesterolXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[5]/td[1]/font[2]"
+             addMG($, nut, "Cholesterol", cholesterolXpath)
+             console.log("Cholesterol " + nut.info["Cholesterol"])
+
+             let sodiumXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[6]/td[1]/font[2]"
+             addMG($, nut, "Sodium", sodiumXpath)
+             console.log("Sodium " + nut.info["Sodium"])
+
+             let proteinXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[5]/td[3]/font[2]"
+             addG($, nut, "Protein", proteinXpath)
+             console.log("Protein " + nut.info["Protein"])
+
+             let ironXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[7]/td/table/tbody/tr[3]/td[2]/table/tbody/tr/td/li/font[2]"
+             addPer($, nut, "Iron", ironXpath)
+             console.log("Iron " + nut.info["Iron"])
+
 
 
              console.log(" ")
          })
  }
 
- function addGram($, nut, name, xpath) {
+ function addG($, nut, name, xpath) {
      let str = $.q(xpath)[0].textContent
      let grams = parseFloat(str.substring(0, str.length - 1))
+     nut.add(name, grams)
+ }
+
+ function addMG($, nut, name, xpath) {
+     let str = $.q(xpath)[0].textContent
+     let grams = parseFloat(str.substring(0, str.length - 2))
+     nut.add(name, grams)
+ }
+
+ function addPer($, nut, name, xpath) {
+     let str = $.q(xpath)[0].textContent
+     let grams = parseInt(str.substring(0, str.length - 1))
      nut.add(name, grams)
  }
 
