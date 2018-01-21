@@ -53,11 +53,11 @@ nutUrl[nine] = urlName + nutPrefix + "40"
         .then(function ($) {
             let college = new cl.College(name)
             let tableNums = $.q("/html/body/table[1]/tbody/tr").length
-            // console.log(tableNums + "\n")
+            console.log(tableNums + "\n")
             for (x = 1; x <= tableNums; x++) {
                 let xpath = "/html/body/table[1]/tbody/tr[" + x + "]/td/table/tbody/tr[2]/td/table/tbody/tr"
                 let foodNums = $.q(xpath).length
-                // console.log(foodNums)
+                console.log(foodNums)
                 for (y = 1; y <= foodNums; y++) {
                     let xpathName = "/html/body/table[1]/tbody/tr[" + x + "]/td/table/tbody/tr[2]/td/table/tbody/tr[" + y + "]/td[1]/table/tbody/tr/td/div/span"
                     let foodName = $.q(xpathName)[0].textContent
@@ -65,7 +65,7 @@ nutUrl[nine] = urlName + nutPrefix + "40"
                     let columnNums = $.q(xpathColumns).length
                     let food = new fd.Food(foodName)
                     college.addFood(food, x-1, y-1);
-                    // console.log(foodName)
+                    console.log(foodName)
                     for (z = 2; z <= columnNums; z++) {
                         let xpathImg = "/html/body/table[1]/tbody/tr[" + x + "]/td/table/tbody/tr[2]/td/table/tbody/tr[" + y + "]/td[1]/table/tbody/tr/td[" + z + "]/img"
                         let imageName = $.q(xpathImg)[0].attributes[0].nodeValue
@@ -73,7 +73,7 @@ nutUrl[nine] = urlName + nutPrefix + "40"
                         let end = imageName.indexOf(".")
                         imageName = imageName.substring(start + 1, end)
                         food.addTag(imageName)
-                        // console.log(imageName)
+                        console.log(imageName)
                     }
                 }
             }
@@ -195,94 +195,93 @@ nutUrl[nine] = urlName + nutPrefix + "40"
              let servingSizeString = $.q(servingSizeXpath)[0].textContent
              let servingSize = parseInt(servingSizeString.substring(0, servingSizeString.indexOf(" ")))
              nut.add("Serving Size", servingSize)
-             // console.log("Serving Size " + nut.info["Serving Size"])
+             console.log("Serving Size " + nut.info["Serving Size"])
 
              let caloriesXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[1]/td[1]/font[4]"
              let caloriesString = $.q(caloriesXpath)[0].textContent
              let calories = parseInt(caloriesString.substring(9, caloriesString.length))
              nut.add("Calories", calories)
-             // console.log("Calories " + nut.info["Calories"])
+             console.log("Calories " + nut.info["Calories"])
 
              let fatCaloriesXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[1]/td[1]/font[5]"
              let fatCaloriesString = $.q(fatCaloriesXpath)[0].textContent
              let fatCalories = parseInt(fatCaloriesString.substring(22, fatCaloriesString.length))
              nut.add("Calories from Fat", fatCalories)
-             // console.log("Calories from Fat " + nut.info["Calories from Fat"])
+             console.log("Calories from Fat " + nut.info["Calories from Fat"])
 
              let fatCarbsXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[2]/td[3]/font[2]"
              addG($, nut, "Tot. Carb.", fatCarbsXpath)
-             // console.log("Tot. Carb. " + nut.info["Tot. Carb."])
+             console.log("Tot. Carb. " + nut.info["Tot. Carb."])
 
              let dietaryFiberXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[3]/td[3]/font[2]"
              addG($, nut, "Dietary Fiber", dietaryFiberXpath)
-             // console.log("Dietary Fiber " + nut.info["Dietary Fiber"])
+             console.log("Dietary Fiber " + nut.info["Dietary Fiber"])
 
              let sugarsXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[4]/td[3]/font[2]"
              addG($, nut, "Sugars", sugarsXpath)
-             // console.log("Sugars " + nut.info["Sugars"])
+             console.log("Sugars " + nut.info["Sugars"])
 
              let totalFatXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[2]/td[1]/font[2]"
              addG($, nut, "Total Fat", totalFatXpath)
-             // console.log("Total Fat " + nut.info["Total Fat"])
+             console.log("Total Fat " + nut.info["Total Fat"])
 
              let satFatXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[3]/td[1]/font[2]"
              addG($, nut, "Sat. Fat", satFatXpath)
-             // console.log("Sat. Fat " + nut.info["Sat. Fat"])
+             console.log("Sat. Fat " + nut.info["Sat. Fat"])
 
              let transFatXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[4]/td[1]/font[2]"
              addG($, nut, "Trans Fat", transFatXpath)
-             // console.log("Trans Fat " + nut.info["Trans Fat"])
+             console.log("Trans Fat " + nut.info["Trans Fat"])
 
              let cholesterolXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[5]/td[1]/font[2]"
              addMG($, nut, "Cholesterol", cholesterolXpath)
-             // console.log("Cholesterol " + nut.info["Cholesterol"])
+             console.log("Cholesterol " + nut.info["Cholesterol"])
 
              let sodiumXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[6]/td[1]/font[2]"
              addMG($, nut, "Sodium", sodiumXpath)
-             // console.log("Sodium " + nut.info["Sodium"])
+             console.log("Sodium " + nut.info["Sodium"])
 
              let proteinXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[5]/td[3]/font[2]"
              addG($, nut, "Protein", proteinXpath)
-             // console.log("Protein " + nut.info["Protein"])
+             console.log("Protein " + nut.info["Protein"])
 
              let ironXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[7]/td/table/tbody/tr[3]/td[2]/table/tbody/tr/td/li/font[2]"
              addPer($, nut, "Iron", ironXpath)
-             // console.log("Iron " + nut.info["Iron"])
+             console.log("Iron " + nut.info["Iron"])
 
              let vitAXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[7]/td/table/tbody/tr[3]/td[4]/table/tbody/tr/td/li/font[2]"
              addPer($, nut, "Vit A", vitAXpath)
-             // console.log("Vit A " + nut.info["Vit A"])
+             console.log("Vit A " + nut.info["Vit A"])
 
              let vitCXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[7]/td/table/tbody/tr[4]/td[1]/table/tbody/tr/td[1]/font[2]"
              addPer($, nut, "Vit C", vitCXpath)
-             // console.log("Vit C " + nut.info["Vit C"])
+             console.log("Vit C " + nut.info["Vit C"])
 
              let vitBXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[7]/td/table/tbody/tr[4]/td[2]/table/tbody/tr/td/li/font[2]"
              addPer($, nut, "Vit B", vitBXpath)
-             // console.log("Vit B " + nut.info["Vit B"])
+             console.log("Vit B " + nut.info["Vit B"])
 
              let satFatPerXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[3]/td[2]/font[1]"
              nut.add("Sat. Fat Per", $.q(satFatPerXpath)[0].textContent)
-             // console.log("Sat. Fat Per " + nut.info["Sat. Fat Per"])
-             //console.log($.q(satFatPerXpath)[0].textContent)
+             console.log("Sat. Fat Per " + nut.info["Sat. Fat Per"])
 
              let totCarbPerXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[2]/td[4]/font[1]"
              nut.add("Tot Carb Per", $.q(totCarbPerXpath)[0].textContent)
-             // console.log("Tot Carb Per " + nut.info["Tot Carb Per"])
+             console.log("Tot Carb Per " + nut.info["Tot Carb Per"])
 
              let fiberPerXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[3]/td[4]/font[1]"
              nut.add("Fiber Per", $.q(fiberPerXpath)[0].textContent)
-             // console.log("Fiber Per " + nut.info["Fiber Per"])
+             console.log("Fiber Per " + nut.info["Fiber Per"])
 
              let cholPerXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[5]/td[2]/font[1]"
              nut.add("Chol Per", $.q(cholPerXpath)[0].textContent)
-             // console.log("Chol Per " + nut.info["Chol Per"])
+             console.log("Chol Per " + nut.info["Chol Per"])
 
              let sodPerXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[6]/td[2]/font[1]"
              nut.add("Sod Per", $.q(sodPerXpath)[0].textContent)
-             // console.log("Sod Per " + nut.info["Sod Per"])
+             console.log("Sod Per " + nut.info["Sod Per"])
 
-             // console.log(" ")
+             console.log(" ")
 
              callback(nut)
          })
