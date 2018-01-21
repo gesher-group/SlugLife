@@ -38,6 +38,10 @@ body {
           transform: translateY(-100%)
 }
 
+table{
+  font-size: .6rem
+}
+
 nav,
 nav ul {
   width: 100%;
@@ -79,7 +83,7 @@ nav li a {
   text-decoration: none;
   display: block;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 nav li a:before {
