@@ -4,6 +4,10 @@ const path = require('path')
 const url = require('url')
 const scraper = require('./scraper')
 
+
+const cheerio = require('cheerio')
+var fs = require('fs');
+
 var urlName = "http://nutrition.sa.ucsc.edu/"
 var urlPrefix = "menuSamp.asp?locationNum="
 var nutPrefix = "picMenu.asp?locationNum="
@@ -41,6 +45,8 @@ function openDiningHallMenu (id){
         protocol: 'file:',
         slashes: true
     }))
+    var $ = cheerio.load(fs.readFileSync(path.join(__dirname, id + '.html')))
+
 }
 
 
@@ -63,7 +69,7 @@ app.on('ready', function(){
         slashes: true
       }))
       
-    win.webContents.openDevTools()
+   // win.webContents.openDevTools()
 
     ipcMain.on('open-menu', function(event, id){
         openDiningHallMenu(id)
