@@ -294,3 +294,4 @@ var currentDate = new Date()
         else 
             document.getElementById("pkclosed").style.background= color
     }
+    document.addEventListener("touchstart", function(){}, true)
