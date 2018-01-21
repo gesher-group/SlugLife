@@ -106,6 +106,42 @@ const sp = require('scrapejs').init({
              addPer($, nut, "Iron", ironXpath)
              console.log("Iron " + nut.info["Iron"])
 
+             let vitAXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[7]/td/table/tbody/tr[3]/td[4]/table/tbody/tr/td/li/font[2]"
+             addPer($, nut, "Vit A", vitAXpath)
+             console.log("Vit A " + nut.info["Vit A"])
+
+             let vitCXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[7]/td/table/tbody/tr[4]/td[1]/table/tbody/tr/td[1]/font[2]"
+             addPer($, nut, "Vit C", vitCXpath)
+             console.log("Vit C " + nut.info["Vit C"])
+
+             let vitBXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[7]/td/table/tbody/tr[4]/td[2]/table/tbody/tr/td/li/font[2]"
+             addPer($, nut, "Vit B", vitBXpath)
+             console.log("Vit B " + nut.info["Vit B"])
+
+             let satFatPerXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[3]/td[2]/font[1]"
+             nut.add("Sat. Fat Per", $.q(satFatPerXpath)[0].textContent)
+             console.log("Sat. Fat Per " + nut.info["Sat. Fat Per"])
+             //console.log($.q(satFatPerXpath)[0].textContent)
+
+             let totCarbPerXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[2]/td[4]/font[1]"
+             nut.add("Tot Carb Per", $.q(totCarbPerXpath)[0].textContent)
+             console.log("Tot Carb Per " + nut.info["Tot Carb Per"])
+
+             let fiberPerXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[3]/td[4]/font[1]"
+             nut.add("Fiber Per", $.q(fiberPerXpath)[0].textContent)
+             console.log("Fiber Per " + nut.info["Fiber Per"])
+
+             let cholPerXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[5]/td[2]/font[1]"
+             nut.add("Chol Per", $.q(cholPerXpath)[0].textContent)
+             console.log("Chol Per " + nut.info["Chol Per"])
+
+             let sodPerXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[6]/td[2]/font[1]"
+             nut.add("Sod Per", $.q(sodPerXpath)[0].textContent)
+             console.log("Sod Per " + nut.info["Sod Per"])
+
+
+
+
 
 
              console.log(" ")
