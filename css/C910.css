@@ -92,11 +92,14 @@ body {
 }
 
 ul {
+  margin: auto;
+  background: #fbf4e0;
+  width: 75%;
   height: 250px;
   position: relative;
   top: 0px;
   bottom: 20px;
-  left: 0px;
+  left: 120px;
   right: 0px;
   overflow: scroll;
   margin: 0;
