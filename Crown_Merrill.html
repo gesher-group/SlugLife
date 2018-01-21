@@ -86,83 +86,17 @@
 
     <div class = "B-Heading"> <h3> Breakfast Menu </h3> </div>
     <div class = "body">
-        <ul>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-      </ul>
-  </div>
+        <ul id = "Breakfast"></ul>
+    </div>
     <div class = "B-Heading"> <h3> Lunch Menu </h3> </div>
     <div class = "body">
-        <ul>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-      </ul>
-  </div>
-    
+        <ul id="Lunch"></ul>
+    </div>
     <div class = "B-Heading"> <h3> Dinner Menu </h3> </div>
     <div class = "body">
-        <ul>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-          <li> List Item </li>
-      </ul>
-  </div>
-  </div>
-  </div>
-  </div>
+        <ul id="Dinner"></ul>
+    </div>
+
     <div class="footer">
         <a href="https://dining.ucsc.edu/eat/">&hearts; Dining Menu</a>
         <p>&nbsp;</p>
@@ -176,6 +110,68 @@
 
     <script src="js/menuF.js"></script>
 
+
+    <script>
+        const scraper = require('./scraper')
+        const fs = require('fs');
+        const request = require('request')
+        const cheerio = require('cheerio')
+        const rp = require('request-promise');
+        const fd = require('./food')
+        const cl = require('./college')
+        const sp = require('scrapejs').init({
+            cc: 50, // up to 2 concurrent requests
+            delay: 2 * 100 // delay 2 seconds before each request
+        });
+
+        const {ipcRenderer} = require('electron')
+
+
+        var urlName = "http://nutrition.sa.ucsc.edu/"
+        var urlPrefix = "menuSamp.asp?locationNum="
+
+        function openNut(html){
+            ipcRenderer.send('open-nut', html)
+        }
+
+        scraper.parseCollege('Crown_Merill', urlName + urlPrefix + "20", function (college) {
+            console.log("HIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
+
+            let html1 = ""
+            let html2 = ""
+            let html3 = ""
+            for(let i = 0; i < college.breakfast.length; i++) {
+                html1 += "<li id='b" + i + "'>" + college.breakfast[i].name + "</li>"
+            }
+            for(let i = 0; i < college.lunch.length; i++) {
+                html2 += "<li id='l" + i + "'>" + college.lunch[i].name + "</li>"
+            }
+            for(let i = 0; i < college.dinner.length; i++) {
+                html3 += "<li id='d" + i + "'>" + college.dinner[i].name + "</li>"
+            }
+
+            document.getElementById("Breakfast").innerHTML = html1
+            document.getElementById("Lunch").innerHTML = html2
+            document.getElementById("Dinner").innerHTML = html3
+            document.getElementById("Late-Night").innerHTML = html4
+
+            for(let i = 0; i < college.breakfast.length; i++) {
+                $("#b" + i).click(function() {
+                    openNut(college.breakfast[i].nutritionInfo.html)
+                })
+            }
+            for(let i = 0; i < college.lunch.length; i++) {
+                $("#l" + i).click(function() {
+                    openNut(college.lunch[i].nutritionInfo.html)
+                })
+            }
+            for(let i = 0; i < college.dinner.length; i++) {
+                $("#d" + i).click(function() {
+                    openNut(college.dinner[i].nutritionInfo.html)
+                })
+            }
+        })
+    </script>
 
 
 

@@ -33,6 +33,15 @@ menuUrl[nine] = urlName + urlPrefix + "40"
 let win = null
 var diningMenus = null
 
+function openNut(html){
+    let win = new BrowserWindow({
+        width: 900,
+        height: 800
+    })
+
+    win.loadURL("data:text/html;charset=utf-8," + encodeURI(html))
+}
+
 function openDiningHallMenu (id){
     let win = new BrowserWindow({
     width: 900,
@@ -75,41 +84,45 @@ app.on('ready', function(){
         openDiningHallMenu(id)
     })
 
-    scraper.parseCollege(nine, menuUrl[nine], function (college) {
-        // console.log("")
-        //
-        // console.log(college.breakfast[0].name)
-        // console.log(college.breakfast[0].tags)
-        // console.log(college.breakfast[0].nutritionInfo.info)
-        //
-        // console.log("")
-        //
-        // console.log(college.lunch[0].name)
-        // console.log(college.lunch[0].tags)
-        // console.log(college.lunch[0].nutritionInfo.info)
-        //
-        // console.log("")
-        //
-        // console.log(college.dinner[0].name)
-        // console.log(college.dinner[0].tags)
-        // console.log(college.dinner[0].nutritionInfo.info)
-        //
-        // console.log("")
-        //
-        // console.log(college.lateNight[0].name)
-        // console.log(college.lateNight[0].tags)
-        // console.log(college.lateNight[0].nutritionInfo.info)
-
-        console.log("DONE")
+    ipcMain.on('open-nut', function(event, html){
+        openNut(html)
     })
 
-    scraper.parseCollege(carson, menuUrl[carson], function (college) {
-        console.log("DONE")
-    })
-
-    scraper.parseCollege(cowell, menuUrl[cowell], function (college) {
-        console.log("DONE")
-    })
+    // scraper.parseCollege(nine, menuUrl[nine], function (college) {
+    //     // console.log("")
+    //     //
+    //     // console.log(college.breakfast[0].name)
+    //     // console.log(college.breakfast[0].tags)
+    //     // console.log(college.breakfast[0].nutritionInfo.info)
+    //     //
+    //     // console.log("")
+    //     //
+    //     // console.log(college.lunch[0].name)
+    //     // console.log(college.lunch[0].tags)
+    //     // console.log(college.lunch[0].nutritionInfo.info)
+    //     //
+    //     // console.log("")
+    //     //
+    //     // console.log(college.dinner[0].name)
+    //     // console.log(college.dinner[0].tags)
+    //     // console.log(college.dinner[0].nutritionInfo.info)
+    //     //
+    //     // console.log("")
+    //     //
+    //     // console.log(college.lateNight[0].name)
+    //     // console.log(college.lateNight[0].tags)
+    //     // console.log(college.lateNight[0].nutritionInfo.info)
+    //
+    //     console.log("DONE")
+    // })
+    //
+    // scraper.parseCollege(carson, menuUrl[carson], function (college) {
+    //     console.log("DONE")
+    // })
+    //
+    // scraper.parseCollege(cowell, menuUrl[cowell], function (college) {
+    //     console.log("DONE")
+    // })
 
     // scraper.parseCollege(porter, menuUrl[porter], function (college) {
     //     // pushToFront(porter, college)

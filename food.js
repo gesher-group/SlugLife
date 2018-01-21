@@ -18,6 +18,7 @@ class NutritionInfo {
     constructor() {
         this.info = []
         this.html = ""
+        this.url = ""
     }
 
     addHTML(html) {

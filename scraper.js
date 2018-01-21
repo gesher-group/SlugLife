@@ -189,6 +189,7 @@ nutUrl[nine] = urlName + nutPrefix + "40"
              let nut = new fd.NutritionInfo()
 
              nut.html = $("table").html()
+             nut.url = url
 
              let servingSizeXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[1]/td[1]/font[3]"
              let servingSizeString = $.q(servingSizeXpath)[0].textContent
