@@ -2,7 +2,7 @@ class Food {
     constructor(name, tags = []) {
         this.name = name
         this.tags = tags
-        this.nutritionInfo = new NutritionInfo()
+        this.nutritionInfo = []
     }
 
     addTag(tag) {
