@@ -8,11 +8,12 @@ const sp = require('scrapejs').init({
     delay: 2 * 1000 // delay 2 seconds before each request
 });
 
-const cowell = 'Cowell/Stevonson'
-const crown = 'Crown/Merrill'
-const porter = 'Porter/Kresge'
-const carson = 'Carson/Oakes'
-const nine = 'College 9/10'
+const cowell = 'Cowell_Stevonson'
+const crown = 'Crown_Merrill'
+const porter = 'Porter_Kresge'
+const carson = 'Carson_Oakes'
+const nine = 'College_9_10'
+
 
 //type is Breakfast, Lunch, Dinner.
 function getMealOptions(type, collegeName){
