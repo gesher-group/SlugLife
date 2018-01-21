@@ -50,7 +50,28 @@ a {
   text-align: center;
     }
 
+.B-Heading {
+    background: #fbf4e0;
+    margin:0px 0px 0px;
+    padding: 20px;
+    color: #a83b3b;
+    text-transform: uppercase;
+    font-family: 'Work sans', sans-serif;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-decoration: none;
+    text-align: center;
+}
 
+.List {
+  font-family: 'Work sans', sans-serif;
+  font-weight: 300;
+    letter-spacing: 3px;
+    text-decoration: none;
+    text-align: center;
+  background: #fbf4e0;
+  padding: 40px
+}
 
 
 /* Thumbnail Box */
@@ -60,19 +81,47 @@ a {
 }
 
 
+@import "compass/css3";
 
+* {box-sizing: border-box;}
 
-/* Footer */
-.footer {
-    margin: auto;
-    width: 100%;
-    max-width: 960px;
-    display: block;
-    font-size: 0.69rem;
-    }
-    .footer, .footer a {
-        color: #fff;
-        }
-        p.right  { 
-            float: right; 
-            }
+body {
+  padding: 20px;
+  width: 100%px;
+  max-height: 200px;
+}
+
+ul {
+  position: relative;
+  top: 0px;
+  bottom: 20px;
+  left: 0px;
+  right: 0px;
+  overflow: scroll;
+  margin: 0;
+  padding: 0;
+  color: #a83b3b;
+  text-align: center;
+  
+  border: 2px solid #ccc;
+  
+  font-family: 'Work sans', sans-serif;
+    font-weight: 500;
+    letter-spacing: 2px;
+  font-size: 16px;
+  -webkit-overflow-scrolling: touch;
+}
+
+li {
+  padding: 10px 20px;
+  
+  border-bottom: 1.5px solid #ccc;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  &:nth-child(even) {
+    background: #f8f8f8;
+  }
+}
