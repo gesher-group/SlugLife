@@ -3,6 +3,7 @@ const request = require('request')
 const path = require('path')
 const url = require('url')
 const rp = require('request-promise');
+const scraper = require('./scraper')
 
 var urlName = "http://nutrition.sa.ucsc.edu/"
 var urlPrefix = "pickMenu.asp?locationNum="
@@ -23,7 +24,7 @@ function getMenuNutrition(menu){
     return rp(menu).then(body =>{
         let regExp = /a href='[a-zA-Z0-9.?=&%']+/g
         let links = body.match(regExp)
-        
+
         let stringLinks = []
         for(let i = 0; i < links.length; i++){
             stringLinks.push(links[i].toString())
@@ -40,18 +41,18 @@ function getMenuNutrition(menu){
 //     console.log(links)
 //  })
 
-
 let win = null
 var diningMenus = null
 
 function openDiningHallMenu (id){
-    let win = new BrowserWindow({
+        let win = new BrowserWindow({
         width: 500,
         height: 500,
         title: id
-    })
+})
     win.show()
 }
+
 
 app.on('ready', function(){
     win = new BrowserWindow(
@@ -76,6 +77,15 @@ app.on('ready', function(){
     ipcMain.on('open-menu', function(event, id){
         openDiningHallMenu(id)
     })
+
+    scraper.parseCollege("College Nine and Ten", menuUrl['9.10'], function (college) {
+        // console.log(college.breakfast[0].name)
+        // console.log(college.breakfast[0].tags)
+        // pushToFirebase(collegeMenu)
+    })
+
+    scraper.parseNutritionInfo("http://nutrition.sa.ucsc.edu/label.asp?locationNum=40&locationName=College+Nine+%26+Ten&dtdate=01%2F20%2F2018&RecNumAndPort=217004%2A2")
+    scraper.parseNutritionInfo("http://nutrition.sa.ucsc.edu/label.asp?locationNum=40&locationName=College+Nine+%26+Ten&dtdate=01%2F20%2F2018&RecNumAndPort=089014%2A2")
 })
 
 app.on('window-all-closed',() =>{
