@@ -94,17 +94,14 @@ app.on('ready', function(){
         // console.log(college.lateNight[0].tags)
         // console.log(college.lateNight[0].nutritionInfo.info)
 
-        // pushToFront(nine, college)
         console.log("DONE")
     })
 
     scraper.parseCollege(carson, menuUrl[carson], function (college) {
-        // pushToFront(carson, college)
         console.log("DONE")
     })
 
     scraper.parseCollege(cowell, menuUrl[cowell], function (college) {
-        // pushToFront(cowell, college)
         console.log("DONE")
     })
 
@@ -118,6 +115,10 @@ app.on('ready', function(){
     //     console.log("DONE")
     // })
 })
+
+function pushToFront() {
+
+}
 
 app.on('window-all-closed',() =>{
     app.quit()
