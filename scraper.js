@@ -1,4 +1,5 @@
 const request = require('request')
+const cheerio = require('cheerio')
 const fd = require('./food')
 const cl = require('./college')
 const sp = require('scrapejs').init({
@@ -47,6 +48,8 @@ const sp = require('scrapejs').init({
      sp.load(url)
          .then(function ($) {
              let nut = new fd.NutritionInfo()
+
+             nut.html = $("table").html()
 
              let servingSizeXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[1]/td[1]/font[3]"
              let servingSizeString = $.q(servingSizeXpath)[0].textContent
@@ -138,10 +141,6 @@ const sp = require('scrapejs').init({
              let sodPerXpath = "/html/body/table[1]/tbody/tr/td/table/tbody/tr[6]/td[2]/font[1]"
              nut.add("Sod Per", $.q(sodPerXpath)[0].textContent)
              console.log("Sod Per " + nut.info["Sod Per"])
-
-
-
-
 
 
              console.log(" ")
