@@ -8,11 +8,11 @@ var urlName = "http://nutrition.sa.ucsc.edu/"
 var urlPrefix = "menuSamp.asp?locationNum="
 var nutPrefix = "picMenu.asp?locationNum="
 
-const cowell = 'Cowell/Stevonson'
-const crown = 'Crown/Merrill'
-const porter = 'Porter/Kresge'
-const carson = 'Carson/Oakes'
-const nine = 'College 9/10'
+const cowell = 'Cowell_Stevonson'
+const crown = 'Crown_Merrill'
+const porter = 'Porter_Kresge'
+const carson = 'Carson_Oakes'
+const nine = 'College_9_10'
 
 var menuUrl = {}
 menuUrl[cowell] = urlName + urlPrefix + "05"
@@ -30,13 +30,19 @@ let win = null
 var diningMenus = null
 
 function openDiningHallMenu (id){
-        let win = new BrowserWindow({
-        width: 500,
-        height: 500,
-        title: id
-})
-    win.show()
+    let win = new BrowserWindow({
+    width: 900,
+    height: 800,
+    title: id
+    })
+
+    win.loadURL(url.format({
+        pathname: path.join(__dirname, id + '.html'),
+        protocol: 'file:',
+        slashes: true
+    }))
 }
+
 
 
 app.on('ready', function(){
