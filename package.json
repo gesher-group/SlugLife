@@ -12,6 +12,7 @@
     "electron": "^1.7.10",
     "express": "latest",
     "request": "latest",
+    "request-promise": "latest",
     "cheerio": "latest"
   }
 }
