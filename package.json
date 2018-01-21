@@ -9,9 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cheerio": "latest",
     "electron": "^1.7.10",
     "express": "latest",
     "request": "latest",
-    "cheerio": "latest"
+    "scrapejs": "^1.0.4"
   }
 }
